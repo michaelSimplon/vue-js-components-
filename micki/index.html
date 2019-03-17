@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="database.json"></script>
+  <script src="vue.min.js"></script>
+  <script src="script.js"></script>
+
+  <title>Vue micki</title>
+</head>
+<body>
+    <div id="app">
+        <div id="demo">
+            <tableau
+                :data="gridData"
+                :columns="gridColumns"
+                v-on:sendfiche="updateItem($event)"
+            ></tableau>
+        </div>
+        <div id="coldroite">
+            <fiche-perso :item='item'></fiche-perso>
+            <stats :data="gridData"></stats>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="database.json"></script>
+  <script src="vue.min.js"></script>
+  <script src="exemple3.js"></script>
+
+  <title>Vue Terence</title>
+</head>
+<body>
+<!-- component template -->
+<script type="text/x-template" id="grid-template">
+  <table id="maintable">
+    <thead>
+      <tr>
+        <th v-for="key in columns"
+          @click="sortBy(key)"
+          :class="{ active: sortKey == key }">
+          {{ key | capitalize }}
+          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(entry, index) in filteredData" class="item" v-bind:id="index" >
+        <td v-for="key in columns">
+          {{entry[key]}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</script>
+
+<!-- TEMPLATE CONTENT -->
+<div id="content">
+  <div id="demo">
+    <!-- BARRE DE RECHERCHE -->
+    <form id="search">
+      Search <input name="query" v-model="searchQuery" placeholder="keyword">
+    </form>
+    <demo-grid
+      :data="gridData"
+      :columns="gridColumns"
+      :filter-key="searchQuery">
+    </demo-grid>
+  </div>
+</div>
+
+
+  <div id="coldroite">
+    <!-- TEMPLATE DETAILS -->
+    <div id="details">
+      <h3>Fiche personnelle</h3>
+      <p>Nom : {{ item.name }}</p>
+      <p>Sexe : {{ item.gender }}</p>
+      <p>Email : {{ item.email }}</p>
+      <p>Age : {{ item.age }}</p>
+      <p>Téléphone : {{ item.phone }}</p>
+      <p>Société : {{ item.company }}</p>
+      <p>Adresse : {{ item.address }}</p>
+    </div>
+    <!-- FIN TEMPLATE DETAILS -->
+
+    <div id="stats">
+      <h3>Statistiques</h3>
+      <p>Nombre total d'adhérents : <span id="stat1"></span></p>
+      <p>Nombre d'hommes : <span id="stat2"></span></p>
+      <p>Nombre de femmes : <span id="stat3"></span></p>
+      <p>Age moyen : <span id="stat4"></span></p>
+    </div>
+  </div>
+</body>
+</html>
